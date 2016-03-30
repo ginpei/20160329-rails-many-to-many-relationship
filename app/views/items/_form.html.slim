@@ -9,4 +9,13 @@
   .field
     = f.label :name
     = f.text_field :name
+
+  ul
+    - @selected_tags.each do |tag|
+      li
+        = render 'tags/option', param_name: 'item[tag_ids][]', tag: tag, checked: true
+    - @other_tags.each do |tag|
+      li
+        = render 'tags/option', param_name: 'item[tag_ids][]', tag: tag
+
   .actions = f.submit

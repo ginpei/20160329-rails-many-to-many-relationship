@@ -1,0 +1,15 @@
+// Required locals:
+// - tag:Tag
+// - checked:bool
+
+- unless defined? param_name
+  - param_name = 'tags[]'
+
+- unless defined? checked
+  - checked = false
+
+label
+  = check_box_tag param_name, tag.id, checked
+  = tag.name
+  = ' '
+  small = "(##{tag.id})"

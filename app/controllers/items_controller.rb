@@ -10,7 +10,8 @@ class ItemsController < ApplicationController
   # GET /items/1
   # GET /items/1.json
   def show
-    @tags = Tag.all
+    @selected_tags = @item.tags
+    @other_tags = @item.other_tags
   end
 
   # GET /items/new
@@ -20,6 +21,8 @@ class ItemsController < ApplicationController
 
   # GET /items/1/edit
   def edit
+    @selected_tags = @item.tags
+    @other_tags = @item.other_tags
   end
 
   # POST /items
@@ -42,6 +45,7 @@ class ItemsController < ApplicationController
   # PATCH/PUT /items/1.json
   def update
     respond_to do |format|
+      @item.update_tags(item_params[:tag_ids])
       if @item.update(item_params)
         format.html { redirect_to @item, notice: 'Item was successfully updated.' }
         format.json { render :show, status: :ok, location: @item }
@@ -70,6 +74,6 @@ class ItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:name)
+      params.require(:item).permit(:name, tag_ids:[])
     end
 end

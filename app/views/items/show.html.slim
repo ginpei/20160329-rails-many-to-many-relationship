@@ -5,8 +5,15 @@ p
   = @item.name
 
 ul
-  - @tags.each do |tag|
+  - @selected_tags.each do |tag|
     li
+      | ✔
+      = tag.name
+      = ' '
+      small = "(##{tag.id})"
+  - @other_tags.each do |tag|
+    li
+      | -
       = tag.name
       = ' '
       small = "(##{tag.id})"
